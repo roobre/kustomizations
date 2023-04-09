@@ -6,6 +6,8 @@ images:
     newName: ghcr.io/roobre/testapp:1.2.3
 
 components:
+  - ../_resources/ingress/internal
+  - ../_resources/ingress/external
   - ../_resources/ss-base
   - ../_resources/ss-base/hostpath
   - ../_resources/ss-base/service

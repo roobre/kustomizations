@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: _-int
+  labels:
+    app.kubernetes.io/name: _
+    app.kubernetes.io/instance: internal
+    app.kubernetes.io/managed-by: kustomize-ingress
+spec:
+  ingressClassName: internal
+  rules:
+    - host: _
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: _
+                port: 
+                  name: _
