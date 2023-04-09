@@ -1,0 +1,12 @@
+resources:
+  - meta.yaml
+
+images:
+  - name: _
+    newName: ghcr.io/roobre/testapp:1.2.3
+
+components:
+  - ../_resources/ss-base
+  - ../_resources/ss-base/hostpath
+  - ../_resources/ss-base/service
+  - ../_resources/names

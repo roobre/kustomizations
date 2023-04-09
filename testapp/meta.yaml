@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: meta
+data:
+  name: testapp
+  port: "8080"
