@@ -26,9 +26,14 @@ replacements:
           - spec.ports.0.name
       - select:
           kind: Ingress
-          name: _
         fieldPaths:
-          - metadata.name
           - metadata.labels.[app.kubernetes.io/name]
           - spec.rules.0.http.paths.0.backend.service.name
           - spec.rules.0.http.paths.0.backend.service.port.name
+      - select:
+          kind: Ingress
+        fieldPaths:
+          - metadata.name
+        options:
+          delimiter: "-"
+          index: 0
