@@ -21,7 +21,7 @@ patches:
 replacements:
   - source:
       kind: ConfigMap
-      name: meta
+      name: kustomize-meta
       fieldPath: data.name
     targets:
       - select:
