@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Replacement
+source:
+  kind: ConfigMap
+  name: kustomize-meta
+  fieldPath: data.name
+targets:
+  - select:
+      kind: StatefulSet
+    fieldPaths:
+      - spec.template.spec.volumes.[name=data].hostPath.path
+    options:
+      delimiter: /
+      index: 4

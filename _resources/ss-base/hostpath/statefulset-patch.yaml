@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: _
+spec:
+  template:
+    spec:
+      volumes:
+        - name: data
+          hostPath:
+            path: /mnt/zmir/docker/_/data
+      containers:
+        - name: _
+          volumeMounts:
+            - mountPath: /data
+              name: data
