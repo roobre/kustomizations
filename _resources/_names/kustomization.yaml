@@ -25,15 +25,22 @@ replacements:
           - spec.selector.[app.kubernetes.io/name]
           - spec.ports.0.name
       - select:
-          kind: Ingress
+          kind: ConfigMap
+          name: env
         fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
-          - spec.rules.0.http.paths.0.backend.service.name
-          - spec.rules.0.http.paths.0.backend.service.port.name
+      - select:
+          kind: Secret
+          name: env
+        fieldPaths:
+          - metadata.labels.[app.kubernetes.io/name]
       - select:
           kind: Ingress
         fieldPaths:
           - metadata.name
+          - metadata.labels.[app.kubernetes.io/name]
+          - spec.rules.0.http.paths.0.backend.service.name
+          - spec.rules.0.http.paths.0.backend.service.port.name
         options:
           delimiter: "-"
           index: 0
