@@ -10,9 +10,9 @@ components:
   - ../_resources/ss-base/service
   - ../_resources/ss-base/hostpath
   - ../_resources/ss-base/env-configmap
+  - ../_resources/ss-base/env-secret
   - ../_resources/ingress/internal
-  - ../_resources/ingress/external
-  - ../_resources/_names
+  # - ../_resources/ingress/external
 
 configMapGenerator:
   # Add things to the env-configmap component
@@ -39,7 +39,7 @@ patches:
       apiVersion: apps/v1
       kind: StatefulSet
       metadata:
-        name: _
+        name: testapp
       spec:
         template:
           spec:

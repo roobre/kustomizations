@@ -6,7 +6,8 @@ source:
   fieldPath: data.port
 targets:
   - select:
-      kind: StatefulSet
-      name: _
+      kind: Service
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
     fieldPaths:
-      - spec.template.spec.containers.[name=_].ports.0.containerPort
+      - spec.ports.0.port
+      - spec.ports.0.targetPort

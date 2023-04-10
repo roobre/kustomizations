@@ -9,10 +9,21 @@ secretGenerator:
 patches:
   - target:
       kind: StatefulSet
-      name: _
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
     patch: |
       - op: add
         path: /spec/template/spec/containers/0/envFrom/-
         value:
           secretRef:
             name: env
+replacements:
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          kind: Secret
+          labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+        fieldPaths:
+          - metadata.labels.[app.kubernetes.io/name]

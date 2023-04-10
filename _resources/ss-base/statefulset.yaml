@@ -17,6 +17,8 @@ spec:
         app.kubernetes.io/name: _
     spec:
       containers:
-      - name: _
-        image: _
-        envFrom: []
+        - name: _
+          image: _
+          envFrom: []
+          volumeMounts: []
+      volumes: []

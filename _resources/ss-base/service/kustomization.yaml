@@ -3,18 +3,15 @@ kind: Component
 resources:
   - service.yaml
 replacements:
-  - path: service-repl.yaml
-  - path: statefulset-repl.yaml
+  - path: service-port-repl.yaml
+  - path: service-name-repl.yaml
+  - path: statefulset-port-repl.yaml
 patches:
-  - patch: |
-      apiVersion: apps/v1
+  - target:
       kind: StatefulSet
-      metadata:
-        name: _
-      spec:
-        template:
-          spec:
-            containers:
-              - name: _
-                ports:
-                  - containerPort: 0
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/ports
+        value:
+          - containerPort: 0

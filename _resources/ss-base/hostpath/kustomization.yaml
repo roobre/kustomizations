@@ -1,6 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-patches:
-  - path: statefulset-patch.yaml
 replacements:
-  - path: statefulset-repl.yaml
+  - path: statefulset-volume-repl.yaml
+patches:
+  - target:
+      kind: StatefulSet
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: data
+          hostPath:
+            path: /mnt/zmir/docker/_/data
+  - target:
+      kind: StatefulSet
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/-
+        value:
+          name: data
+          mountPath: /data
+
