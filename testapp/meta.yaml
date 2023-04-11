@@ -5,3 +5,4 @@ metadata:
 data:
   name: testapp
   port: "8080"
+  hostpath.mountPath: /data/hostpath

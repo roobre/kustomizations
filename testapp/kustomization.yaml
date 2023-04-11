@@ -9,6 +9,7 @@ components:
   - ../_resources/ss-base
   - ../_resources/ss-base/service
   - ../_resources/ss-base/hostpath
+  - ../_resources/ss-base/hostpath/mount
   - ../_resources/ss-base/pvc
   - ../_resources/ss-base/pvc/nfs
   - ../_resources/ss-base/env-configmap
