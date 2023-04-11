@@ -9,10 +9,12 @@ components:
   - ../_resources/ss-base
   - ../_resources/ss-base/service
   - ../_resources/ss-base/hostpath
+  - ../_resources/ss-base/pvc
+  - ../_resources/ss-base/pvc/nfs
   - ../_resources/ss-base/env-configmap
   - ../_resources/ss-base/env-secret
-  - ../_resources/ingress/internal
-  # - ../_resources/ingress/external
+  - ../_resources/ingress-internal
+  - ../_resources/ingress/external
 
 configMapGenerator:
   # Add things to the env-configmap component
@@ -20,36 +22,14 @@ configMapGenerator:
     behavior: replace
     literals:
       - TZ=Europe/Madrid
-  # Create a custom configmap with config
-  - name: config
-    files:
-      - example.conf
 
 patches:
   # Change ingress hostnames
   - target:
       kind: Ingress
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ingress
+
     patch: |
       - op: replace
         path: /spec/rules/0/host
         value: testapp.terabox.moe
-
-  # Add custom configMap
-  - patch: |
-      apiVersion: apps/v1
-      kind: StatefulSet
-      metadata:
-        name: testapp
-      spec:
-        template:
-          spec:
-            volumes:
-              - name: config
-                configMap:
-                  name: config
-            containers:
-              - name: testapp
-                volumeMounts:
-                  - mountPath: /config/foo.conf
-                    name: config
-                    subpath: foo.conf
