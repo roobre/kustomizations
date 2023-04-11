@@ -7,13 +7,16 @@ patches:
       kind: StatefulSet
       labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
     patch: |
-      - op: add
-        path: /spec/volumeClaimTemplates/-
-        value:
-          metadata:
-            name: data
-          spec:
-            accessModes: [ "ReadWriteOnce" ]
-            resources:
-              requests:
-                storage: 2Gi
+      apiVersion: apps/v1
+      kind: StatefulSet
+      metadata:
+        name: _
+      spec:
+        volumeClaimTemplates:
+          - metadata:
+              name: data
+            spec:
+              accessModes: [ "ReadWriteOnce" ]
+              resources:
+                requests:
+                  storage: 2Gi
