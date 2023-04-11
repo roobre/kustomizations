@@ -14,7 +14,7 @@ components:
   - ../_resources/ss-base/env-configmap
   - ../_resources/ss-base/env-secret
   - ../_resources/ingress-internal
-  - ../_resources/ingress/external
+  - ../_resources/ingress-external
 
 configMapGenerator:
   # Add things to the env-configmap component
