@@ -13,13 +13,3 @@ patches:
           name: data
           hostPath:
             path: /mnt/zmir/docker/_/data
-  - target:
-      kind: StatefulSet
-      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
-    patch: |
-      - op: add
-        path: /spec/template/spec/containers/0/volumeMounts/-
-        value:
-          name: data
-          mountPath: /data
-
