@@ -7,7 +7,7 @@ source:
 targets:
   - select:
       kind: Service
-      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+      labelSelector: app.kubernetes.io/managed-by=kustomize-service
     fieldPaths:
       - spec.ports.0.port
       - spec.ports.0.targetPort

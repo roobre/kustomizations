@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - target:
+      kind: StatefulSet
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/ports
+        value:
+          - containerPort: 0
+replacements:
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.port
+    targets:
+      - select:
+          kind: StatefulSet
+          labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+        fieldPaths:
+          - spec.template.spec.containers.0.ports.0.containerPort

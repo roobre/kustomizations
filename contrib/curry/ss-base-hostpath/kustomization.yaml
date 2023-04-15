@@ -1,17 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-resources:
-  - service.yaml
 replacements:
-  - path: service-port-repl.yaml
-  - path: service-name-repl.yaml
-  - path: statefulset-port-repl.yaml
+  - path: statefulset-volume-repl.yaml
 patches:
   - target:
       kind: StatefulSet
       labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
     patch: |
       - op: add
-        path: /spec/template/spec/containers/0/ports
+        path: /spec/template/spec/volumes/-
         value:
-          - containerPort: 0
+          name: data
+          hostPath:
+            path: /mnt/zmir/docker/_

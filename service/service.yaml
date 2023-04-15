@@ -4,7 +4,7 @@ metadata:
   name: _
   labels:
     app.kubernetes.io/name: _
-    app.kubernetes.io/managed-by: kustomize-ss-base
+    app.kubernetes.io/managed-by: kustomize-service
 spec:
   selector:
     app.kubernetes.io/name: _

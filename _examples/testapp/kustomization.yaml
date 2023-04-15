@@ -1,0 +1,49 @@
+resources:
+  - meta.yaml
+
+# Specify images for the StatefulSet
+images:
+  - name: _
+    newName: ghcr.io/roobre/testapp:1.2.3
+
+components:
+  # Create a base StatefulSet
+  - ../../ss-base
+  # Add a port to it
+  - ../../ss-base/port
+  # Add a hostPath mount following the "curry" convention
+  - ../../contrib/curry/ss-base-hostpath
+  # Mount the volume
+  - ../../ss-base/mount
+  # Add a pvc template as well
+  - ../../ss-base/pvc
+  # Assign the "nfs" class to the PVC
+  - ../../contrib/curry/pvc-nfs
+  # Create a configmap for env vars
+  - ../../ss-base/env-configmap
+  # Create a secret for env vars
+  - ../../ss-base/env-secret
+  # Create a service
+  - ../../service
+  # And an ingress
+  - ../../ingress
+  # Also an ingress with class: external, a curry convention
+  - ../../contrib/curry/ingress-external
+
+# Add things to the env-configmap component
+configMapGenerator:
+  - name: env
+    behavior: replace
+    literals:
+      - TZ=Europe/Madrid
+
+patches:
+  # Change ingress hostnames
+  - target:
+      kind: Ingress
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ingress
+
+    patch: |
+      - op: replace
+        path: /spec/rules/0/host
+        value: testapp.terabox.moe

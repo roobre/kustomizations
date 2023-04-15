@@ -7,7 +7,7 @@ source:
 targets:
   - select:
       kind: Service
-      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+      labelSelector: app.kubernetes.io/managed-by=kustomize-service
     fieldPaths:
       - metadata.name
       - metadata.labels.[app.kubernetes.io/name]
