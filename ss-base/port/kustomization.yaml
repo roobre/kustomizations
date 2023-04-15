@@ -6,9 +6,10 @@ patches:
       labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
     patch: |
       - op: add
-        path: /spec/template/spec/containers/0/ports
+        path: /spec/template/spec/containers/0/ports/-
         value:
-          - containerPort: 0
+          containerPort: 0
+          name: _
 replacements:
   - source:
       kind: ConfigMap
@@ -19,4 +20,14 @@ replacements:
           kind: StatefulSet
           labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
         fieldPaths:
-          - spec.template.spec.containers.0.ports.0.containerPort
+          - spec.template.spec.containers.0.ports.[name=_].containerPort
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          kind: StatefulSet
+          labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+        fieldPaths:
+          - spec.template.spec.containers.0.ports.[name=_].name
