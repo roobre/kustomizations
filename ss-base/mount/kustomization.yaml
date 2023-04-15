@@ -14,7 +14,7 @@ replacements:
   - source:
       kind: ConfigMap
       name: kustomize-meta
-      fieldPath: data.mountPath
+      fieldPath: data.[data.mountPath]
     targets:
       - select:
           kind: StatefulSet
