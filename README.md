@@ -14,6 +14,8 @@ Application-specific quirks can be applied using patches on top of the provided 
 
 Cluster-specific variations can be built by users on a different repo. As an example, composable variations for my personal cluster `cury` can be found in `contrib/curry`.
 
+This project uses [semver](https://semver.org/), but changes to the `contrib/` folder are not considered breaking.
+
 ## Kustomize 101
 
 ### [Kustomization](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
