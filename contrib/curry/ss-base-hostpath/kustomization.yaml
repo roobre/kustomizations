@@ -12,7 +12,7 @@ patches:
         value:
           name: data
           hostPath:
-            path: /mnt/zmir/k8s/_
+            path: /mnt/zmir/docker/_
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
