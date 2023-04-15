@@ -12,4 +12,4 @@ patches:
         value:
           name: data
           hostPath:
-            path: /mnt/zmir/docker/_
+            path: /mnt/zmir/k8s/_
