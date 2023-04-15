@@ -13,3 +13,7 @@ patches:
           name: data
           hostPath:
             path: /mnt/zmir/k8s/_
+      - op: add
+        path: /spec/template/spec/nodeSelector
+        value:
+          storage.curry/hostpath: zmir
