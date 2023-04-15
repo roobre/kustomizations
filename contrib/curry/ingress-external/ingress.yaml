@@ -6,10 +6,12 @@ metadata:
     app.kubernetes.io/name: _
     app.kubernetes.io/instance: external
     app.kubernetes.io/managed-by: kustomize-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: external
   rules:
-    - host: _
+    - host: _.terabox.moe
       http:
         paths:
           - pathType: Prefix
@@ -19,3 +21,7 @@ spec:
                 name: _
                 port: 
                   name: _
+  tls:
+    - secretName: https-cert
+      hosts:
+        - _.terabox.moe

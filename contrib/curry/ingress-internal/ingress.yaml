@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-    - host: _
+    - host: _.terabox.moe
       http:
         paths:
           - pathType: Prefix

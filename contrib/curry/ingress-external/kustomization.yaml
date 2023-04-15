@@ -19,3 +19,12 @@ replacements:
         options:
           delimiter: "-"
           index: 0
+      - select:
+          kind: Ingress
+          labelSelector: app.kubernetes.io/managed-by=kustomize-ingress
+        fieldPaths:
+          - spec.rules.0.host
+          - spec.tls.0.hosts.0
+        options:
+          delimiter: .
+          index: 0
