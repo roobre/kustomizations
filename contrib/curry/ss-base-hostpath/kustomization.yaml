@@ -13,6 +13,7 @@ patches:
           name: data
           hostPath:
             path: /mnt/zmir/docker/_
+            type: Directory
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
