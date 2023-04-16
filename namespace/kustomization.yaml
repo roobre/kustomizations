@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+resources:
+  - namespace.yaml
+replacements:
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          kind: Namespace
+          labelSelector: app.kubernetes.io/managed-by=kustomize
+        fieldPaths:
+          - metadata.name
