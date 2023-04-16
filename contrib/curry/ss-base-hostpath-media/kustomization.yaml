@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - target:
+      kind: StatefulSet
+      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: media
+          hostPath:
+            path: /mnt/zmir/media/
+            type: Directory
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/-
+        value:
+          name: media
+          mountPath: /mnt/zmir/media/
+      - op: add
+        path: /spec/template/spec/nodeSelector
+        value:
+          storage.curry/hostpath: zmir
