@@ -39,7 +39,8 @@ spec:
             periodSeconds: 5
             exec:
               command:
-                - pg_isready
-                - --timeout=1
+                - sh
+                - -c
+                - pg_isready --username=$POSTGRES_USER --dbname=$POSTGRES_DB --timeout=1
       volumes: []
   volumeClaimTemplates: []
