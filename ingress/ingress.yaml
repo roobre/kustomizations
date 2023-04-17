@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/instance: main
     app.kubernetes.io/managed-by: kustomize
 spec:
-  ingressClassName: external
   rules:
     - host: _
       http:
