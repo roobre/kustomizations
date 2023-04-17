@@ -24,6 +24,7 @@ replacements:
           labelSelector: app.kubernetes.io/managed-by=kustomize
         fieldPaths:
           - spec.rules.0.host
+          - spec.tls.0.hosts.0
         options:
           delimiter: .
           index: 0
