@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: _-postgres
+  name: postgres
   labels:
     app.kubernetes.io/name: _
     app.kubernetes.io/component: postgres
