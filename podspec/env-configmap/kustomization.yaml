@@ -26,7 +26,6 @@ replacements:
       - select:
           kind: ConfigMap
           name: env
-          labelSelector: app.kubernetes.io/component=application
-          annotationSelector: kustomize/patch-target=pod-spec
+          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
         fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
