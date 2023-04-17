@@ -3,7 +3,9 @@ kind: Component
 patches:
   - target:
       kind: StatefulSet
-      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=postgres
+      labelSelector: >-
+        app.kubernetes.io/managed-by=kustomize,
+        app.kubernetes.io/component=postgres
     patch: |
       apiVersion: apps/v1
       kind: StatefulSet

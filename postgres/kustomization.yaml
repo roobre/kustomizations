@@ -32,7 +32,9 @@ replacements:
       - select:
           kind: ConfigMap
           name: postgres-env
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=postgres
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=postgres
         fieldPaths:
           - data.POSTGRES_USER
           - data.POSTGRES_DB
@@ -40,12 +42,16 @@ replacements:
       - select:
           kind: Secret
           name: postgres-env
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=postgres
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=postgres
         fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
       - select:
           kind: StatefulSet
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=postgres
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=postgres
         fieldPaths:
           - metadata.name
           - metadata.labels.[app.kubernetes.io/name]
@@ -55,7 +61,9 @@ replacements:
           delimiter: "-"
       - select:
           kind: Service
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=postgres
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=postgres
         fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
           - spec.selector.[app.kubernetes.io/name]
