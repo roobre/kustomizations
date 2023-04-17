@@ -45,3 +45,11 @@ replacements:
           - metadata.labels.[app.kubernetes.io/name]
           - spec.selector.matchLabels.[app.kubernetes.io/name]
           - spec.template.metadata.labels.[app.kubernetes.io/name]
+        options:
+          delimiter: "-"
+      - select:
+          kind: Service
+          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=postgres
+        fieldPaths:
+          - metadata.labels.[app.kubernetes.io/name]
+          - spec.selector.[app.kubernetes.io/name]
