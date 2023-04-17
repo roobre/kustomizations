@@ -15,14 +15,6 @@ configMapGenerator:
         app.kubernetes.io/managed-by: kustomize
         app.kubernetes.io/component: postgres
 
-secretGenerator:
-  - name: postgres-env
-    options:
-      labels:
-        app.kubernetes.io/name: _
-        app.kubernetes.io/managed-by: kustomize
-        app.kubernetes.io/component: postgres
-
 replacements:
   - source:
       kind: ConfigMap
@@ -38,14 +30,6 @@ replacements:
         fieldPaths:
           - data.POSTGRES_USER
           - data.POSTGRES_DB
-          - metadata.labels.[app.kubernetes.io/name]
-      - select:
-          kind: Secret
-          name: postgres-env
-          labelSelector: >-
-            app.kubernetes.io/managed-by=kustomize,
-            app.kubernetes.io/component=postgres
-        fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
       - select:
           kind: StatefulSet
