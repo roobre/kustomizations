@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: r-_
+  labels:
+    app.kubernetes.io/name: _
+    app.kubernetes.io/managed-by: kustomize
+    owner: roobre
