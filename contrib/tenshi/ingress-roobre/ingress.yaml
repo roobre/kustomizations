@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: _
+  labels:
+    app.kubernetes.io/name: _
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  ingressClassName: internal
+  rules:
+    - host: _.roob.re
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: _
+                port: 
+                  name: _
+  tls:
+    - secretName: https-cert
+      hosts:
+        - _.roob.re
