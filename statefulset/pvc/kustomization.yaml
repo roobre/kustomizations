@@ -3,7 +3,7 @@ kind: Component
 patches:
   - target:
       kind: StatefulSet
-      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
     patch: |
       apiVersion: apps/v1
       kind: StatefulSet

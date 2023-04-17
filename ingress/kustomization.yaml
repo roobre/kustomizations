@@ -10,7 +10,7 @@ replacements:
     targets:
       - select:
           kind: Ingress
-          labelSelector: app.kubernetes.io/managed-by=kustomize-ingress
+          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/instance=main
         fieldPaths:
           - metadata.name
           - metadata.labels.[app.kubernetes.io/name]

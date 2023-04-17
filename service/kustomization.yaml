@@ -3,5 +3,27 @@ kind: Component
 resources:
   - service.yaml
 replacements:
-  - path: service-port-repl.yaml
-  - path: service-name-repl.yaml
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          kind: Service
+          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+        fieldPaths:
+          - metadata.name
+          - metadata.labels.[app.kubernetes.io/name]
+          - spec.selector.[app.kubernetes.io/name]
+          - spec.ports.0.name
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.port
+    targets:
+      - select:
+          kind: Service
+          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+        fieldPaths:
+          - spec.ports.0.port
+          - spec.ports.0.targetPort

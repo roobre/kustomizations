@@ -3,7 +3,7 @@ kind: Component
 patches:
   - target:
       kind: Service
-      labelSelector: app.kubernetes.io/managed-by=kustomize-service
+      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
     patch: |
       - op: replace
         path: /spec/ports/0/port

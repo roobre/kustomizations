@@ -1,20 +1,21 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-secretGenerator:
+configMapGenerator:
   - name: env
     options:
       labels:
         app.kubernetes.io/name: _
-        app.kubernetes.io/managed-by: kustomize-ss-base
+        app.kubernetes.io/component: application
+        app.kubernetes.io/managed-by: kustomize
 patches:
   - target:
-      kind: StatefulSet
-      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+      annotationSelector: kustomize/patch-target=pod-spec
     patch: |
       - op: add
         path: /spec/template/spec/containers/0/envFrom/-
         value:
-          secretRef:
+          configMapRef:
             name: env
 replacements:
   - source:
@@ -23,7 +24,9 @@ replacements:
       fieldPath: data.name
     targets:
       - select:
-          kind: Secret
-          labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+          kind: ConfigMap
+          name: env
+          labelSelector: app.kubernetes.io/component=application
+          annotationSelector: kustomize/patch-target=pod-spec
         fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
