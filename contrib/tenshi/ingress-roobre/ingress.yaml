@@ -5,8 +5,10 @@ metadata:
   labels:
     app.kubernetes.io/name: _
     app.kubernetes.io/managed-by: kustomize
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-roobre
 spec:
-  ingressClassName: internal
+  ingressClassName: roobre
   rules:
     - host: _.roob.re
       http:
