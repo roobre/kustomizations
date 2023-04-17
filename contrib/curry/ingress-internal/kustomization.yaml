@@ -10,7 +10,9 @@ replacements:
     targets:
       - select:
           kind: Ingress
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/instance=internal
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/instance=internal
         fieldPaths:
           - metadata.name
           - metadata.labels.[app.kubernetes.io/name]
@@ -21,7 +23,9 @@ replacements:
           index: 0
       - select:
           kind: Ingress
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/instance=internal
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/instance=internal
         fieldPaths:
           - spec.rules.0.host
         options:
