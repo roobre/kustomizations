@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - target:
+      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+      annotationSelector: kustomize/patch-target=pod-spec
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: data
+          hostPath:
+            path: /mnt/zmir/docker/_
+            type: Directory
+      - op: add
+        path: /spec/template/spec/nodeSelector
+        value:
+          storage.curry/hostpath: zmir
+replacements:
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+          annotationSelector: kustomize/patch-target=pod-spec
+        fieldPaths:
+          - spec.template.spec.volumes.[name=data].hostPath.path
+        options:
+          delimiter: /
+          index: 4

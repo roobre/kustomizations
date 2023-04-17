@@ -3,7 +3,7 @@ kind: Component
 patches:
   - target:
       kind: StatefulSet
-      labelSelector: app.kubernetes.io/managed-by=kustomize-ss-base
+      labelSelector: app.kubernetes.io/managed-by=kustomize
     patch: |
       - op: replace
         path: /spec/volumeClaimTemplates/0/spec/storageClassName
