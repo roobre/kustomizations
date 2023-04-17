@@ -10,7 +10,9 @@ replacements:
     targets:
       - select:
           kind: StatefulSet
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application
         fieldPaths:
           - metadata.name
           - metadata.labels.[app.kubernetes.io/name]

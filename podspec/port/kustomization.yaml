@@ -2,7 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 patches:
   - target:
-      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+      labelSelector: >-
+        app.kubernetes.io/managed-by=kustomize,
+        app.kubernetes.io/component=application
       annotationSelector: kustomize/patch-target=pod-spec
     patch: |
       - op: add
@@ -17,7 +19,9 @@ replacements:
       fieldPath: data.port
     targets:
       - select:
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application
           annotationSelector: kustomize/patch-target=pod-spec
         fieldPaths:
           - spec.template.spec.containers.0.ports.[name=_].containerPort
@@ -27,7 +31,9 @@ replacements:
       fieldPath: data.name
     targets:
       - select:
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application
           annotationSelector: kustomize/patch-target=pod-spec
         fieldPaths:
           - spec.template.spec.containers.0.ports.[name=_].name

@@ -10,6 +10,7 @@ replacements:
     targets:
       - select:
           kind: Namespace
-          labelSelector: app.kubernetes.io/managed-by=kustomize
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize
         fieldPaths:
           - metadata.name

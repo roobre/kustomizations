@@ -9,7 +9,9 @@ configMapGenerator:
         app.kubernetes.io/managed-by: kustomize
 patches:
   - target:
-      labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+      labelSelector: >-
+        app.kubernetes.io/managed-by=kustomize,
+        app.kubernetes.io/component=application
       annotationSelector: kustomize/patch-target=pod-spec
     patch: |
       - op: add
@@ -26,6 +28,8 @@ replacements:
       - select:
           kind: ConfigMap
           name: env
-          labelSelector: app.kubernetes.io/managed-by=kustomize, app.kubernetes.io/component=application
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application
         fieldPaths:
           - metadata.labels.[app.kubernetes.io/name]
