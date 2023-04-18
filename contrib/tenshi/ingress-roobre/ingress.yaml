@@ -21,6 +21,6 @@ spec:
                 port: 
                   name: _
   tls:
-    - secretName: https-cert
+    - secretName: _-https-cert
       hosts:
         - _.roob.re
