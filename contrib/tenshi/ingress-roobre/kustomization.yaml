@@ -16,6 +16,7 @@ replacements:
           - metadata.labels.[app.kubernetes.io/name]
           - spec.rules.0.http.paths.0.backend.service.name
           - spec.rules.0.http.paths.0.backend.service.port.name
+          - spec.tls.0.secretName
         options:
           delimiter: "-"
           index: 0
