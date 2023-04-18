@@ -12,6 +12,7 @@ replacements:
           kind: Ingress
           labelSelector: >-
             app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application,
             app.kubernetes.io/instance=main
         fieldPaths:
           - metadata.name
