@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - target:
+      labelSelector: >-
+        app.kubernetes.io/managed-by=kustomize,
+        app.kubernetes.io/component=application
+      annotationSelector: kustomize/patch-target=pod-spec
+    patch: |
+      - op: add
+        path: /spec/template/spec/affinity
+        value:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: _
+                    app.kubernetes.io/component: application
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application
+          annotationSelector: kustomize/patch-target=pod-spec
+        fieldPaths:
+          - spec.template.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.[topologyKey=kubernetes.io/hostname].labelSelector.matchLabels.[app.kubernetes.io/name]
