@@ -12,14 +12,14 @@ patches:
         value:
           name: media
           hostPath:
-            path: /mnt/zmir/media/
+            path: /mnt/z2/media/
             type: Directory
       - op: add
         path: /spec/template/spec/containers/0/volumeMounts/-
         value:
           name: media
-          mountPath: /mnt/zmir/media/
+          mountPath: /mnt/z2/media/
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
-          storage.curry/hostpath: zmir
+          storage.curry/hostpath: z2

@@ -12,12 +12,12 @@ patches:
         value:
           name: data
           hostPath:
-            path: /mnt/zmir/docker/_
+            path: /mnt/z2/k8s/_
             type: Directory
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
-          storage.curry/hostpath: zmir
+          storage.curry/hostpath: z2
 replacements:
   - source:
       kind: ConfigMap
