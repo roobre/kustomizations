@@ -33,7 +33,6 @@ components:
 # Add things to the env-configmap component
 configMapGenerator:
   - name: env
-    behavior: replace
     literals:
       - TZ=Europe/Madrid
 
