@@ -1,12 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-secretGenerator:
-  - name: env
-    options:
-      labels:
-        app.kubernetes.io/name: _
-        app.kubernetes.io/component: application
-        app.kubernetes.io/managed-by: kustomize
 patches:
   - target:
       labelSelector: >-
@@ -19,17 +12,3 @@ patches:
         value:
           secretRef:
             name: env
-replacements:
-  - source:
-      kind: ConfigMap
-      name: kustomize-meta
-      fieldPath: data.name
-    targets:
-      - select:
-          kind: Secret
-          name: env
-          labelSelector: >-
-            app.kubernetes.io/managed-by=kustomize,
-            app.kubernetes.io/component=application
-        fieldPaths:
-          - metadata.labels.[app.kubernetes.io/name]
