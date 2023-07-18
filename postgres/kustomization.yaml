@@ -4,33 +4,12 @@ resources:
   - statefulset.yaml
   - service.yaml
 
-configMapGenerator:
-  - name: postgres-env
-    literals:
-      - POSTGRES_USER=_
-      - POSTGRES_DB=_
-    options:
-      labels:
-        app.kubernetes.io/name: _
-        app.kubernetes.io/managed-by: kustomize
-        app.kubernetes.io/component: postgres
-
 replacements:
   - source:
       kind: ConfigMap
       name: kustomize-meta
       fieldPath: data.name
     targets:
-      - select:
-          kind: ConfigMap
-          name: postgres-env
-          labelSelector: >-
-            app.kubernetes.io/managed-by=kustomize,
-            app.kubernetes.io/component=postgres
-        fieldPaths:
-          - data.POSTGRES_USER
-          - data.POSTGRES_DB
-          - metadata.labels.[app.kubernetes.io/name]
       - select:
           kind: StatefulSet
           labelSelector: >-

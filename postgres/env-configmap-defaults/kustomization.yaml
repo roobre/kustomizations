@@ -1,0 +1,43 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+patches:
+  - target:
+      labelSelector: >-
+        app.kubernetes.io/managed-by=kustomize,
+        app.kubernetes.io/component=postgres
+      annotationSelector: kustomize/patch-target=pod-spec
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom/-
+        value:
+          configMapRef:
+            name: postgres-env-defaults
+
+configMapGenerator:
+  - name: postgres-env-defaults
+    literals:
+      - POSTGRES_USER=_
+      - POSTGRES_DB=_
+    options:
+      labels:
+        app.kubernetes.io/name: _
+        app.kubernetes.io/managed-by: kustomize
+        app.kubernetes.io/component: postgres
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: kustomize-meta
+      fieldPath: data.name
+    targets:
+      - select:
+          kind: ConfigMap
+          name: postgres-env-defaults
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=postgres
+        fieldPaths:
+          - data.POSTGRES_USER
+          - data.POSTGRES_DB
+          - metadata.labels.[app.kubernetes.io/name]
