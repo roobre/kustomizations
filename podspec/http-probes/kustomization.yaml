@@ -8,17 +8,24 @@ patches:
       annotationSelector: kustomize/patch-target=pod-spec
     patch: |
       - op: add
+        path: /spec/template/spec/containers/0/startupProbe
+        value:
+          periodSeconds: 5
+          failureThreshold: 12
+          httpGet:
+            port: _
+      - op: add
         path: /spec/template/spec/containers/0/livenessProbe
         value:
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          failureThreshold: 3
+          periodSeconds: 5
+          failureThreshold: 6
           httpGet:
             port: _
       - op: add
         path: /spec/template/spec/containers/0/readinessProbe
         value:
-          failureThreshold: 1
+          periodSeconds: 5
+          failureThreshold: 3
           httpGet:
             port: _
 replacements:
@@ -33,5 +40,6 @@ replacements:
             app.kubernetes.io/component=application
           annotationSelector: kustomize/patch-target=pod-spec
         fieldPaths:
+          - spec.template.spec.containers.0.startupProbe.httpGet.port
           - spec.template.spec.containers.0.livenessProbe.httpGet.port
           - spec.template.spec.containers.0.readinessProbe.httpGet.port
