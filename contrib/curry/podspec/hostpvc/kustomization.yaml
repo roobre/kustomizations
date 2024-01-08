@@ -19,7 +19,7 @@ patches:
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
-          hostpath.storage.curry/znmve: "true"
+          hostpath.storage.curry/znvme: "true"
 replacements:
   - source:
       kind: ConfigMap
