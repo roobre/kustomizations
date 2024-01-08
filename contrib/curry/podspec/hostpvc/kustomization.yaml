@@ -11,6 +11,8 @@ patches:
         path: /spec/template/spec/volumes/-
         value:
           name: data
+          persistentVolumeClaim:
+            claimName: _
           hostPath:
             path: /mnt/znvme/k8s/_
             type: Directory
@@ -30,7 +32,11 @@ replacements:
             app.kubernetes.io/component=application
           annotationSelector: kustomize/patch-target=pod-spec
         fieldPaths:
-          - spec.template.spec.volumes.[name=data].hostPath.path
-        options:
-          delimiter: /
-          index: 4
+          - spec.template.spec.volumes.[name=data].persistentVolumeClaim.claimName
+      - select:
+          kind: PersistentVolumeClaim
+          labelSelector: >-
+            app.kubernetes.io/managed-by=kustomize,
+            app.kubernetes.io/component=application
+        fieldPaths:
+          - metadata.name

@@ -12,12 +12,12 @@ patches:
         value:
           name: data
           hostPath:
-            path: /mnt/z2/k8s-db/_
+            path: /mnt/znvme/k8s-db/_
             type: Directory
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
-          storage.curry/hostpath: z2
+          storage.curry/hostpath: znvme
 replacements:
   - source:
       kind: ConfigMap
