@@ -22,4 +22,4 @@ patches:
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
-          storage.curry/hostpath: z2
+          hostpath.storage.curry/z2: "true"
