@@ -16,6 +16,7 @@ spec:
   replicas: 1
   template:
     metadata:
+      annotations: {}
       labels:
         app.kubernetes.io/name: _
         app.kubernetes.io/component: application
