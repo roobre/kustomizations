@@ -21,8 +21,8 @@ spec:
       name: backup-creds
       key: password
   backup:
-    schedule: '0 3 * * *'
-    failedJobsHistoryLimit: 2
+    schedule: '@weekly-random'
+    failedJobsHistoryLimit: 1
     successfulJobsHistoryLimit: 1
   check:
     schedule: '0 4 * * 1'
