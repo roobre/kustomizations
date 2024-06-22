@@ -26,8 +26,12 @@ spec:
     successfulJobsHistoryLimit: 1
   check:
     schedule: '0 4 * * 1'
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 0
   prune:
     schedule: '0 4 * * 2'
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 0
     retention:
       keepDaily: 3
       keepWeekly: 1
